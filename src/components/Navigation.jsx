@@ -1,132 +1,132 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
-
-    const updateActiveSection = () => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      
+      const sections = document.querySelectorAll('section[id]');
       let current = 'hero';
-
       sections.forEach((section) => {
-        if (window.scrollY >= section.offsetTop - 120) {
+        if (window.scrollY >= section.offsetTop - 200) {
           current = section.getAttribute('id');
         }
       });
-
       setActiveSection(current);
     };
 
-    updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-
-    return () => window.removeEventListener('scroll', updateActiveSection);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-
-  const menuVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
-  };
-
-  const linkVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (i) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.1 }
-    })
-  };
-
   const navLinks = [
-    { name: 'Projects', href: '#projects' },
+    { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'About', href: '#about' }
+    { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' }
   ];
 
   return (
-    <nav>
-      <a href="#hero" className="nav-logo">
-        SP<span>.</span>
-      </a>
-
-      {/* Desktop Menu */}
-      <ul className="nav-links">
-        {navLinks.map((link, i) => (
-          <motion.li
-            key={link.name}
-            custom={i}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * i, duration: 0.5 }}
-          >
-            <a href={link.href} className={activeSection === link.href.slice(1) ? 'active' : ''}>
-              {link.name}
-            </a>
-          </motion.li>
-        ))}
-        <motion.li
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          <a href="#contact" className="nav-cta">
-            Contact
-          </a>
-        </motion.li>
-      </ul>
-
-      {/* Mobile Menu Button */}
-      <motion.div
-        className="nav-toggle"
-        onClick={toggleMenu}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+    <>
+      <motion.nav
+        className={`glass ${scrolled ? 'scrolled' : ''}`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          width: scrolled ? 'min(90%, 700px)' : 'min(95%, 1200px)',
+          transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
       >
-        <span style={{ transform: isOpen ? 'rotate(45deg) translateY(11px)' : 'rotate(0)' }} />
-        <span style={{ opacity: isOpen ? 0 : 1 }} />
-        <span style={{ transform: isOpen ? 'rotate(-45deg) translateY(-11px)' : 'rotate(0)' }} />
-      </motion.div>
+        <a href="#hero" className="nav-logo">
+          Sai<span>.</span>
+        </a>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.ul
-          className="nav-links open"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {navLinks.map((link, i) => (
-            <motion.li
-              key={link.name}
-              custom={i}
-              variants={linkVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <a href={link.href} onClick={closeMenu}>
+        <ul className="nav-links">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a 
+                href={link.href} 
+                className={activeSection === link.href.slice(1) ? 'active text-primary' : ''}
+              >
                 {link.name}
               </a>
-            </motion.li>
+            </li>
           ))}
-          <motion.li
-            custom={navLinks.length}
-            variants={linkVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <a href="#contact" className="nav-cta" onClick={closeMenu}>
-              Contact
+          <li>
+            <a href="#contact" className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
+              Let's Talk
             </a>
-          </motion.li>
-        </motion.ul>
-      )}
-    </nav>
+          </li>
+        </ul>
+
+        <button 
+          className="mobile-menu-btn d-none" 
+          onClick={() => setIsOpen(!isOpen)}
+          style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </motion.nav>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="mobile-menu glass-card"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              top: '90px',
+              left: '5%',
+              right: '5%',
+              zIndex: 99,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              padding: '2rem'
+            }}
+          >
+            {navLinks.map((link, i) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                onClick={() => setIsOpen(false)}
+                style={{
+                  color: activeSection === link.href.slice(1) ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  fontSize: '1.25rem',
+                  fontWeight: 500
+                }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
+              href="#contact"
+              className="btn-primary"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              onClick={() => setIsOpen(false)}
+              style={{ justifyContent: 'center', marginTop: '1rem' }}
+            >
+              Contact Me
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };

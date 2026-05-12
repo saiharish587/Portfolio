@@ -3,8 +3,8 @@ export const portfolioData = {
     name: 'Sai Harish',
     surname: 'Puchala',
     badge: 'Available for opportunities',
-    tagline: 'Full Stack Developer & ML Enthusiast crafting modern, responsive, and impactful web applications. Building at the intersection of clean UI and intelligent systems.',
-    cta1: 'View Projects ↓',
+    tagline: 'Building immersive web experiences blending AI, modern design, and scalable frontend systems.',
+    cta1: 'Explore Work',
     cta2: 'Download Resume',
     email: 'saiharish0088@gmail.com'
   },
@@ -12,7 +12,7 @@ export const portfolioData = {
     {
       id: 1,
       tag: 'FEATURED',
-      icon: '🅷',
+      icon: 'Monitor',
       title: 'HAWK',
       desc: 'Modern web application for real-time monitoring and analytics.',
       stack: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
@@ -20,7 +20,7 @@ export const portfolioData = {
     },
     {
       id: 2,
-      icon: '🤖',
+      icon: 'Bot',
       title: 'OrbiusAI',
       desc: 'AI-powered content generation platform with advanced NLP.',
       stack: ['Python', 'FastAPI', 'React', 'TensorFlow'],
@@ -28,7 +28,7 @@ export const portfolioData = {
     },
     {
       id: 3,
-      icon: '📊',
+      icon: 'LineChart',
       title: 'COVID Tracing',
       desc: 'Pandemic data visualization and tracking dashboard.',
       stack: ['Vue.js', 'D3.js', 'Flask', 'PostgreSQL'],
@@ -36,7 +36,7 @@ export const portfolioData = {
     },
     {
       id: 4,
-      icon: '🎛️',
+      icon: 'AudioWaveform',
       title: 'Chaff',
       desc: 'Audio processing and noise reduction application.',
       stack: ['JavaScript', 'Web Audio API', 'Python'],
@@ -45,16 +45,16 @@ export const portfolioData = {
   ],
   skills: [
     {
-      category: 'Frontend',
-      items: ['React', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Next.js']
+      category: 'Frontend & Creative',
+      items: ['React', 'Three.js', 'GSAP', 'Framer Motion', 'Tailwind CSS', 'Next.js']
     },
     {
-      category: 'Backend',
-      items: ['Node.js', 'Python', 'FastAPI', 'MongoDB', 'PostgreSQL', 'Firebase']
+      category: 'Backend & AI',
+      items: ['Python', 'Node.js', 'FastAPI', 'TensorFlow', 'PostgreSQL', 'Firebase']
     },
     {
-      category: 'Tools & ML',
-      items: ['Git', 'Docker', 'AWS', 'TensorFlow', 'Scikit-learn', 'Pandas']
+      category: 'Architecture & Tools',
+      items: ['System Design', 'Docker', 'AWS', 'Git', 'Vercel', 'UI/UX Design']
     }
   ],
   experience: {
@@ -62,10 +62,10 @@ export const portfolioData = {
     role: 'Full Stack Developer Intern',
     period: 'Jun 2024 - Aug 2024',
     bullets: [
-      'Developed responsive web interfaces using React and modern CSS',
-      'Built RESTful APIs with Node.js and Express',
-      'Implemented real-time features using Socket.io',
-      'Collaborated with design team to optimize UX'
+      'Engineered responsive web interfaces using React and modern design systems',
+      'Architected scalable RESTful APIs leveraging Node.js and Express',
+      'Integrated real-time bidirectional communication using Socket.io',
+      'Collaborated closely with designers to refine user experience and micro-interactions'
     ]
   },
   education: [
@@ -83,21 +83,21 @@ export const portfolioData = {
     }
   ],
   achievements: [
-    { medal: '🥇', title: '1st Place', sub: 'Hackathon Winner' },
-    { medal: '🏆', title: 'Top Performer', sub: '50+ Projects Completed' },
-    { medal: '⭐', title: 'Open Source', sub: '5K+ GitHub Stars' }
+    { medal: 'Trophy', title: '1st Place', sub: 'Hackathon Winner' },
+    { medal: 'Star', title: 'Top Performer', sub: '50+ Projects Completed' },
+    { medal: 'Award', title: 'Open Source', sub: '5K+ GitHub Stars' }
   ],
   about: {
-    text: `I'm a passionate Full Stack Developer with a keen interest in Machine Learning and AI. With experience in building scalable web applications and implementing intelligent systems, I thrive at the intersection of beautiful design and powerful functionality. When I'm not coding, I love contributing to open-source projects and exploring new technologies.`,
+    text: `I build immersive web experiences blending AI, design, and scalable frontend systems. My focus lies at the intersection of cinematic UI/UX and intelligent architectures, crafting products that don't just function flawlessly but feel like a premium experience. I am passionate about 3D web design, modern animations, and creating digital environments that leave a lasting impact.`,
     facts: [
-      { icon: '💻', label: 'Languages', value: 'JavaScript, Python, Java' },
-      { icon: '🎯', label: 'Focus', value: 'Full Stack & AI' },
-      { icon: '🌍', label: 'Location', value: 'Hyderabad, India' }
+      { icon: 'Code2', label: 'Stack', value: 'React, Node, Python' },
+      { icon: 'Cpu', label: 'Focus', value: 'Frontend & AI Systems' },
+      { icon: 'Globe', label: 'Location', value: 'Hyderabad, India' }
     ]
   },
   contact: {
-    title: 'Get In Touch',
-    subtitle: 'I\'d love to hear from you. Send me an email or find me on social media.',
+    title: 'Let\'s create something extraordinary.',
+    subtitle: 'Ready to bring your vision to life? I\'m currently open to new opportunities and exciting collaborations.',
     email: 'saiharish0088@gmail.com',
     socials: [
       { name: 'GitHub', url: 'https://github.com/saiharish587' },
