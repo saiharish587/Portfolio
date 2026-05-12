@@ -26,6 +26,7 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
+    { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
@@ -39,10 +40,6 @@ export const Navigation = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          width: scrolled ? 'min(90%, 700px)' : 'min(95%, 1200px)',
-          transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
-        }}
       >
         <a href="#hero" className="nav-logo">
           Sai<span>.</span>
@@ -51,20 +48,19 @@ export const Navigation = () => {
         <ul className="nav-links">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <a 
-                href={link.href} 
-                className={activeSection === link.href.slice(1) ? 'active text-primary' : ''}
+              <a
+                href={link.href}
+                className={activeSection === link.href.slice(1) ? 'active' : ''}
               >
                 {link.name}
               </a>
             </li>
           ))}
-          <li>
-            <a href="#contact" className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
-              Let's Talk
-            </a>
-          </li>
         </ul>
+
+        <a href="#contact" className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
+          Let's Talk
+        </a>
 
         <button 
           className="mobile-menu-btn d-none" 
