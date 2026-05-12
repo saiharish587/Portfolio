@@ -9,7 +9,7 @@ export const Projects = () => {
     image: project.image,
     title: project.title,
     subtitle: project.category,
-    url: project.url,
+    url: project.link,
     borderColor: project.color,
     gradient: `linear-gradient(145deg, ${project.color}, #000)`
   }));

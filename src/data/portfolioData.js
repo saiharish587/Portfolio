@@ -1,3 +1,8 @@
+import hawkImage from '../assets/HAWK.jpg';
+import orbiusImage from '../assets/Orbius-AI.jpg';
+import contactTracingImage from '../assets/Contact-Tracing.jpg';
+import chaffImage from '../assets/Chaff.jpeg';
+
 export const portfolioData = {
   hero: {
     name: 'Sai Harish',
@@ -15,32 +20,44 @@ export const portfolioData = {
       icon: 'Monitor',
       title: 'HAWK',
       desc: 'Modern web application for real-time monitoring and analytics.',
+      category: 'Real-time Monitoring',
       stack: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-      link: 'https://github.com/saiharish587'
+      link: 'https://github.com/saiharish587',
+      image: hawkImage,
+      color: '#4F46E5'
     },
     {
       id: 2,
       icon: 'Bot',
       title: 'OrbiusAI',
       desc: 'AI-powered content generation platform with advanced NLP.',
+      category: 'AI & Machine Learning',
       stack: ['Python', 'FastAPI', 'React', 'TensorFlow'],
-      link: 'https://github.com/saiharish587'
+      link: 'https://github.com/saiharish587',
+      image: orbiusImage,
+      color: '#06B6D4'
     },
     {
       id: 3,
       icon: 'LineChart',
       title: 'COVID Tracing',
       desc: 'Pandemic data visualization and tracking dashboard.',
+      category: 'Data Visualization',
       stack: ['Vue.js', 'D3.js', 'Flask', 'PostgreSQL'],
-      link: 'https://github.com/saiharish587'
+      link: 'https://github.com/saiharish587',
+      image: contactTracingImage,
+      color: '#EF4444'
     },
     {
       id: 4,
       icon: 'AudioWaveform',
       title: 'Chaff',
       desc: 'Audio processing and noise reduction application.',
+      category: 'Audio Processing',
       stack: ['JavaScript', 'Web Audio API', 'Python'],
-      link: 'https://github.com/saiharish587'
+      link: 'https://github.com/saiharish587',
+      image: chaffImage,
+      color: '#10B981'
     }
   ],
   skills: [
