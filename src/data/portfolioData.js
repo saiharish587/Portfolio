@@ -1,15 +1,12 @@
-import hawkImage from '../assets/HAWK.jpg';
-import orbiusImage from '../assets/Orbius-AI.jpg';
-import contactTracingImage from '../assets/Contact-Tracing.jpg';
 import chaffImage from '../assets/Chaff.jpeg';
 
 export const portfolioData = {
   hero: {
     name: 'Sai Harish',
     surname: 'Puchala',
-    badge: 'Available for opportunities',
-    tagline: 'Building immersive web experiences blending AI, modern design, and scalable frontend systems.',
-    cta1: 'Explore Work',
+    badge: 'Open to Internships & Full-time Roles',
+    tagline: 'Full Stack Developer crafting responsive web applications with React, Python, and Firebase. Passionate about UI/UX design and clean code.',
+    cta1: 'View My Work',
     cta2: 'Download Resume',
     email: 'saiharish0088@gmail.com'
   },
@@ -17,61 +14,83 @@ export const portfolioData = {
     {
       id: 1,
       tag: 'FEATURED',
-      icon: 'Monitor',
-      title: 'HAWK',
-      desc: 'Modern web application for real-time monitoring and analytics.',
-      category: 'Real-time Monitoring',
-      stack: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
+      icon: 'ShoppingCart',
+      title: 'Chaff',
+      desc: 'E-commerce platform enabling farmers to directly sell agricultural residue (stubble) to manufacturers. Features secure authentication, inventory management, and transaction processing.',
+      category: 'E-commerce Platform',
+      stack: ['React', 'Firebase', 'Tailwind CSS', 'JavaScript'],
       link: 'https://github.com/saiharish587',
-      image: hawkImage,
-      color: '#4F46E5'
+      image: chaffImage,
+      color: '#10B981'
     },
     {
       id: 2,
-      icon: 'Bot',
-      title: 'OrbiusAI',
-      desc: 'AI-powered content generation platform with advanced NLP.',
-      category: 'AI & Machine Learning',
-      stack: ['Python', 'FastAPI', 'React', 'TensorFlow'],
+      icon: 'Leaf',
+      title: 'Urban Plant Guide',
+      desc: 'Smart urban gardening platform connecting plant enthusiasts. Features plant identification, care guides, and community discussions with real-time updates.',
+      category: 'Community Platform',
+      stack: ['React', 'Firebase', 'JavaScript', 'Tailwind CSS'],
       link: 'https://github.com/saiharish587',
-      image: orbiusImage,
+      image: null,
       color: '#06B6D4'
     },
     {
       id: 3,
-      icon: 'LineChart',
-      title: 'COVID Tracing',
-      desc: 'Pandemic data visualization and tracking dashboard.',
-      category: 'Data Visualization',
-      stack: ['Vue.js', 'D3.js', 'Flask', 'PostgreSQL'],
+      icon: 'ClipboardList',
+      title: 'Student Dashboard',
+      desc: 'Event registration and student management platform. Allows students to discover events, register for activities, and track participation history.',
+      category: 'Dashboard & CMS',
+      stack: ['React', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'],
       link: 'https://github.com/saiharish587',
-      image: contactTracingImage,
-      color: '#EF4444'
+      image: null,
+      color: '#8B5CF6'
     },
     {
       id: 4,
-      icon: 'AudioWaveform',
-      title: 'Chaff',
-      desc: 'Audio processing and noise reduction application.',
-      category: 'Audio Processing',
-      stack: ['JavaScript', 'Web Audio API', 'Python'],
+      icon: 'Building2',
+      title: 'Banking System',
+      desc: 'Desktop banking application with user authentication, account management, and transaction processing. Built with Java Swing for the UI and MySQL for data persistence.',
+      category: 'Desktop Application',
+      stack: ['Java Swing', 'MySQL', 'JDBC', 'OOP'],
       link: 'https://github.com/saiharish587',
-      image: chaffImage,
-      color: '#10B981'
+      image: null,
+      color: '#F59E0B'
+    },
+    {
+      id: 5,
+      icon: 'Cube',
+      title: '3D Interactive Portfolio',
+      desc: 'Experiential portfolio with interactive 3D elements and smooth animations. Showcases skills through engaging UI/UX design and frontend creativity.',
+      category: '3D Web Design',
+      stack: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
+      link: 'https://github.com/saiharish587',
+      image: null,
+      color: '#EC4899'
+    },
+    {
+      id: 6,
+      icon: 'BookOpen',
+      title: 'Community Stories',
+      desc: 'Anonymous story-sharing platform where users can share experiences and read stories from the community. Features voting, commenting, and content moderation.',
+      category: 'Social Platform',
+      stack: ['React', 'Firebase', 'Tailwind CSS', 'JavaScript'],
+      link: 'https://github.com/saiharish587',
+      image: null,
+      color: '#06B6D4'
     }
   ],
   skills: [
     {
-      category: 'Frontend & Creative',
-      items: ['React', 'Three.js', 'GSAP', 'Framer Motion', 'Tailwind CSS', 'Next.js']
+      category: 'Frontend Development',
+      items: ['React.js', 'HTML5', 'CSS3', 'JavaScript (ES6+)', 'Tailwind CSS']
     },
     {
-      category: 'Backend & AI',
-      items: ['Python', 'Node.js', 'FastAPI', 'TensorFlow', 'PostgreSQL', 'Firebase']
+      category: 'Backend & Database',
+      items: ['Python', 'Firebase', 'JavaScript', 'MySQL', 'Java']
     },
     {
-      category: 'Architecture & Tools',
-      items: ['System Design', 'Docker', 'AWS', 'Git', 'Vercel', 'UI/UX Design']
+      category: 'Design & Tools',
+      items: ['UI/UX Design', 'Responsive Design', 'Git', 'REST APIs', 'Cloud Computing']
     }
   ],
   experience: {
@@ -79,46 +98,46 @@ export const portfolioData = {
     role: 'Full Stack Developer Intern',
     period: 'Jun 2024 - Aug 2024',
     bullets: [
-      'Engineered responsive web interfaces using React and modern design systems',
-      'Architected scalable RESTful APIs leveraging Node.js and Express',
-      'Integrated real-time bidirectional communication using Socket.io',
-      'Collaborated closely with designers to refine user experience and micro-interactions'
+      'Built responsive React components following modern design patterns and best practices',
+      'Developed RESTful APIs using Node.js and Express with proper error handling',
+      'Implemented real-time features with Socket.io for live collaboration',
+      'Collaborated with design team to translate wireframes into functional, pixel-perfect UI'
     ]
   },
   education: [
     {
       school: 'B V Raju Institute of Technology',
-      degree: 'BTech in Computer Science',
-      details: 'Hyderabad, India • 2022-2026'
+      degree: 'B.Tech in Data Science',
+      details: 'Hyderabad, India • 2022-2027'
     },
     {
-      title: 'Certifications',
+      title: 'Focus Areas',
       certs: [
-        'Frontend Developer Internship - Meta',
-        'AWS Cloud Practitioner Certification'
+        'Full-stack Web Development',
+        'Database Design & Cloud Services'
       ]
     }
   ],
   achievements: [
-    { medal: 'Trophy', title: '1st Place', sub: 'Hackathon Winner' },
-    { medal: 'Star', title: 'Top Performer', sub: '50+ Projects Completed' },
-    { medal: 'Award', title: 'Open Source', sub: '5K+ GitHub Stars' }
+    { medal: 'Trophy', title: '1st Prize', sub: 'Bugzilla - Technical Debugging Competition' },
+    { medal: 'Star', title: 'Gold Medalist', sub: 'State & District-Level Kabaddi Championships' },
+    { medal: 'Award', title: 'Bronze Medalist', sub: 'National-Level Kabaddi Tournament' }
   ],
   about: {
-    text: `I build immersive web experiences blending AI, design, and scalable frontend systems. My focus lies at the intersection of cinematic UI/UX and intelligent architectures, crafting products that don't just function flawlessly but feel like a premium experience. I am passionate about 3D web design, modern animations, and creating digital environments that leave a lasting impact.`,
+    text: `I'm a B.Tech Data Science student passionate about building web experiences that work beautifully and feel intuitive. I enjoy combining clean code with thoughtful UI/UX design to create products that users actually want to use. When I'm not coding, you'll find me gaming, designing interfaces, or exploring new technologies.`,
     facts: [
-      { icon: 'Code2', label: 'Stack', value: 'React, Node, Python' },
-      { icon: 'Cpu', label: 'Focus', value: 'Frontend & AI Systems' },
+      { icon: 'Code2', label: 'Focus', value: 'React, Python, Firebase' },
+      { icon: 'Cpu', label: 'Interests', value: 'UI/UX, Coding, Gaming' },
       { icon: 'Globe', label: 'Location', value: 'Hyderabad, India' }
     ]
   },
   contact: {
-    title: 'Let\'s create something extraordinary.',
-    subtitle: 'Ready to bring your vision to life? I\'m currently open to new opportunities and exciting collaborations.',
+    title: 'Let\'s collaborate and build something great.',
+    subtitle: 'I\'m open to internships, freelance projects, and learning opportunities. Feel free to reach out!',
     email: 'saiharish0088@gmail.com',
     socials: [
       { name: 'GitHub', url: 'https://github.com/saiharish587' },
-      { name: 'LinkedIn', url: 'https://linkedin.com' },
+      { name: 'LinkedIn', url: 'https://www.linkedin.com/in/saiharishpuchala/' },
       { name: 'Email', url: 'mailto:saiharish0088@gmail.com' }
     ]
   }
