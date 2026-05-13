@@ -1,4 +1,7 @@
 import chaffImage from '../assets/Chaff.jpeg';
+import contactTracingImage from '../assets/Contact-Tracing.jpg';
+import hawkImage from '../assets/HAWK.jpg';
+import orbiusAIImage from '../assets/Orbius-AI.jpg';
 
 export const portfolioData = {
   hero: {
@@ -25,58 +28,36 @@ export const portfolioData = {
     },
     {
       id: 2,
-      icon: 'Leaf',
-      title: 'Urban Plant Guide',
-      desc: 'Smart urban gardening platform connecting plant enthusiasts. Features plant identification, care guides, and community discussions with real-time updates.',
-      category: 'Community Platform',
-      stack: ['React', 'Firebase', 'JavaScript', 'Tailwind CSS'],
+      icon: 'Activity',
+      title: 'Contact Tracing',
+      desc: 'Health tracking and contact tracing application designed to monitor and manage disease spread. Real-time location tracking, notification system, and health status updates.',
+      category: 'Health & Tracking',
+      stack: ['React', 'Firebase', 'Maps API', 'JavaScript'],
       link: 'https://github.com/saiharish587',
-      image: null,
-      color: '#06B6D4'
+      image: contactTracingImage,
+      color: '#EF4444'
     },
     {
       id: 3,
-      icon: 'ClipboardList',
-      title: 'Student Dashboard',
-      desc: 'Event registration and student management platform. Allows students to discover events, register for activities, and track participation history.',
-      category: 'Dashboard & CMS',
-      stack: ['React', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'],
+      icon: 'Eye',
+      title: 'HAWK - Surveillance System',
+      desc: 'Advanced surveillance and monitoring system with real-time alerting capabilities. Features video stream processing, anomaly detection, and comprehensive logging.',
+      category: 'Security & Monitoring',
+      stack: ['React', 'Python', 'OpenCV', 'WebSocket'],
       link: 'https://github.com/saiharish587',
-      image: null,
-      color: '#8B5CF6'
+      image: hawkImage,
+      color: '#1F2937'
     },
     {
       id: 4,
-      icon: 'Building2',
-      title: 'Banking System',
-      desc: 'Desktop banking application with user authentication, account management, and transaction processing. Built with Java Swing for the UI and MySQL for data persistence.',
-      category: 'Desktop Application',
-      stack: ['Java Swing', 'MySQL', 'JDBC', 'OOP'],
+      icon: 'Zap',
+      title: 'Orbius AI',
+      desc: 'AI-powered intelligent assistant leveraging machine learning models for natural language processing and contextual understanding. Provides personalized recommendations and smart automation.',
+      category: 'AI/ML Platform',
+      stack: ['React', 'Python', 'TensorFlow', 'NLP'],
       link: 'https://github.com/saiharish587',
-      image: null,
-      color: '#F59E0B'
-    },
-    {
-      id: 5,
-      icon: 'Cube',
-      title: '3D Interactive Portfolio',
-      desc: 'Experiential portfolio with interactive 3D elements and smooth animations. Showcases skills through engaging UI/UX design and frontend creativity.',
-      category: '3D Web Design',
-      stack: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
-      link: 'https://github.com/saiharish587',
-      image: null,
-      color: '#EC4899'
-    },
-    {
-      id: 6,
-      icon: 'BookOpen',
-      title: 'Community Stories',
-      desc: 'Anonymous story-sharing platform where users can share experiences and read stories from the community. Features voting, commenting, and content moderation.',
-      category: 'Social Platform',
-      stack: ['React', 'Firebase', 'Tailwind CSS', 'JavaScript'],
-      link: 'https://github.com/saiharish587',
-      image: null,
-      color: '#06B6D4'
+      image: orbiusAIImage,
+      color: '#6366F1'
     }
   ],
   skills: [
