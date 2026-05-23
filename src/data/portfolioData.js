@@ -77,7 +77,7 @@ export const portfolioData = {
   experience: {
     company: 'STUD Entertainments',
     role: 'Full Stack Developer Intern',
-    period: 'Jun 2024 - Aug 2024',
+    period: 'Jul 2025 - Nov 2025',
     bullets: [
       'Built responsive React components following modern design patterns and best practices',
       'Developed RESTful APIs using Node.js and Express with proper error handling',
@@ -89,7 +89,7 @@ export const portfolioData = {
     {
       school: 'B V Raju Institute of Technology',
       degree: 'B.Tech in Data Science',
-      details: 'Hyderabad, India • 2022-2027'
+      details: 'Hyderabad, India • Expected Apr 2027'
     },
     {
       title: 'Focus Areas',

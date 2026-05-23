@@ -58,12 +58,12 @@ export const Navigation = () => {
           ))}
         </ul>
 
-        <a href="#contact" className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
+        <a href="#contact" className="btn-primary">
           Let's Talk
         </a>
 
         <button 
-          className="mobile-menu-btn d-none" 
+          className="mobile-menu-btn" 
           onClick={() => setIsOpen(!isOpen)}
           style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
         >

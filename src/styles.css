@@ -262,6 +262,47 @@ nav.scrolled {
   list-style: none;
 }
 
+/* Hide mobile menu button by default (desktop) */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  /* Make the primary button more compact on small screens */
+  .btn-primary {
+    padding: 0.35rem 0.9rem !important;
+    font-size: 0.8rem !important;
+    min-width: auto;
+    white-space: nowrap;
+  }
+
+  /* Hide desktop CTA on mobile to avoid overflow; mobile menu contains contact */
+  nav > a.btn-primary {
+    display: none !important;
+  }
+
+  nav {
+    padding: 0 1rem;
+    height: 56px;
+  }
+}
+
 .nav-links a {
   color: var(--text-secondary);
   text-decoration: none;
@@ -482,6 +523,14 @@ section {
   line-height: 1.1;
   margin: 1rem 0;
   letter-spacing: -0.04em;
+}
+
+/* Ensure hero name is visible over the animated background */
+.hero-name {
+  color: var(--text-primary);
+  position: relative;
+  z-index: 12;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
 .hero-tagline {
