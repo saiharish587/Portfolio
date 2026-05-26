@@ -2,6 +2,7 @@ import chaffImage from '../assets/Chaff.jpeg';
 import contactTracingImage from '../assets/Contact-Tracing.jpg';
 import hawkImage from '../assets/HAWK.jpg';
 import orbiusAIImage from '../assets/Orbius-AI.jpg';
+import aiArticleProcessorImage from '../assets/AI-Article-Processor.png';
 
 export const portfolioData = {
   hero: {
@@ -58,6 +59,18 @@ export const portfolioData = {
       link: 'https://github.com/saiharish587',
       image: orbiusAIImage,
       color: '#6366F1'
+    },
+    {
+      id: 5,
+      tag: 'FEATURED',
+      icon: 'Sparkles',
+      title: 'AI-Article-Processor',
+      desc: 'Intelligent article processing system powered by AI. Automatically extracts, summarizes, and categorizes content from multiple sources with advanced NLP and machine learning algorithms.',
+      category: 'AI/NLP Platform',
+      stack: ['Python', 'NLP', 'Machine Learning', 'Web Scraping'],
+      link: 'https://github.com/saiharish587/AI-Article-Processor.git',
+      image: aiArticleProcessorImage,
+      color: '#8B5CF6'
     }
   ],
   skills: [
