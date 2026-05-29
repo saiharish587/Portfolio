@@ -561,6 +561,84 @@ section {
   gap: 1.5rem;
 }
 
+.featured-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.featured-projects-grid--all {
+  align-items: stretch;
+}
+
+.featured-project-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 250px;
+  aspect-ratio: 16 / 11;
+  padding: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-project-link .tilted-card-figure {
+  width: 100%;
+  height: 100%;
+}
+
+.featured-project-link .tilted-card-inner,
+.featured-project-link .tilted-card-img {
+  width: 100%;
+  height: 100%;
+}
+
+.featured-project-link .tilted-card-img {
+  border-radius: 0;
+}
+
+.featured-project-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.8rem;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(5, 8, 22, 0.05) 0%, rgba(5, 8, 22, 0.72) 100%);
+}
+
+.featured-project-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.featured-project-desc {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  margin-bottom: 0.55rem;
+}
+
+.featured-project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.featured-project-stack span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-size: 0.62rem;
+  backdrop-filter: blur(12px);
+}
+
 .project-card {
   grid-column: span 6;
   display: flex;
@@ -614,6 +692,46 @@ section {
   border: 1px solid var(--glass-border);
   border-radius: 99px;
   color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+  .featured-projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured-project-link {
+    min-height: 210px;
+  }
+}
+
+@media (max-width: 720px) {
+  .featured-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-project-link {
+    min-height: 190px;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .featured-project-link {
+    min-height: 180px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .featured-project-overlay {
+    padding: 0.75rem;
+  }
+
+  .featured-project-title {
+    font-size: 0.95rem;
+  }
+
+  .featured-project-desc {
+    font-size: 0.72rem;
+  }
 }
 
 /* About & Skills Bento */
