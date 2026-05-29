@@ -23,7 +23,7 @@ export const portfolioData = {
       desc: 'E-commerce platform enabling farmers to directly sell agricultural residue (stubble) to manufacturers. Features secure authentication, inventory management, and transaction processing.',
       category: 'E-commerce Platform',
       stack: ['React', 'Firebase', 'Tailwind CSS', 'JavaScript'],
-      link: 'https://github.com/saiharish587',
+      link: 'https://github.com/saiharish587/Chaff.git',
       image: chaffImage,
       color: '#10B981'
     },
@@ -34,7 +34,7 @@ export const portfolioData = {
       desc: 'Health tracking and contact tracing application designed to monitor and manage disease spread. Real-time location tracking, notification system, and health status updates.',
       category: 'Health & Tracking',
       stack: ['React', 'Firebase', 'Maps API', 'JavaScript'],
-      link: 'https://github.com/saiharish587',
+      link: 'https://github.com/saiharish587/contact-tracing.git',
       image: contactTracingImage,
       color: '#EF4444'
     },
@@ -45,7 +45,7 @@ export const portfolioData = {
       desc: 'Advanced surveillance and monitoring system with real-time alerting capabilities. Features video stream processing, anomaly detection, and comprehensive logging.',
       category: 'Security & Monitoring',
       stack: ['React', 'Python', 'OpenCV', 'WebSocket'],
-      link: 'https://github.com/saiharish587',
+      link: 'https://github.com/saiharish587/HAWK.git',
       image: hawkImage,
       color: '#1F2937'
     },
@@ -56,7 +56,7 @@ export const portfolioData = {
       desc: 'AI-powered intelligent assistant leveraging machine learning models for natural language processing and contextual understanding. Provides personalized recommendations and smart automation.',
       category: 'AI/ML Platform',
       stack: ['React', 'Python', 'TensorFlow', 'NLP'],
-      link: 'https://github.com/saiharish587',
+      link: 'https://github.com/saiharish587/Orbius-AI.git',
       image: orbiusAIImage,
       color: '#6366F1'
     },
