@@ -115,6 +115,9 @@
   font-size: 0.92rem;
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chroma-info .role,

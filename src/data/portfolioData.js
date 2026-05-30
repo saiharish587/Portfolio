@@ -100,16 +100,23 @@ export const portfolioData = {
   },
   education: [
     {
-      school: 'B V Raju Institute of Technology',
-      degree: 'B.Tech in Data Science',
-      details: 'Hyderabad, India • Expected Apr 2027'
+      school: 'M B Grammar High School',
+      degree: '10th Grade',
+      details: 'Hyderabad, Telangana, India • Graduated 2021'
     },
     {
-      title: 'Focus Areas',
-      certs: [
-        'Full-stack Web Development',
-        'Database Design & Cloud Services'
-      ]
+      school: 'Sri Chaitanya Jr Kalashala',
+      degree: 'Intermediate',
+      details: 'IDPL, Telangana, India • Graduated 2027'
+    },
+    {
+      school: 'B V Raju Institute of Technology',
+      degree: 'B.Tech in Data Science',
+      details: 'Narsapur, Telangana, India • Expected Apr 2027'
+    },
+    {
+      title: 'Certifications',
+      certs: []
     }
   ],
   achievements: [
@@ -135,4 +142,43 @@ export const portfolioData = {
       { name: 'Email', url: 'mailto:saiharish0088@gmail.com' }
     ]
   }
+  ,
+  certificates: [
+    {
+      id: 1,
+      title: 'Internship Completion Certificate',
+      issuer: 'STUD Entertainments',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_internship-completion-letter-activity-7466324931472097280-48UE'
+    },
+    {
+      id: 2,
+      title: 'Microsoft Applied Skills: Accelerate AI-assisted Development by using GitHub Copilot',
+      issuer: 'Microsoft',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_github-copilot-activity-7461680995415801856-VxkS'
+    },
+    {
+      id: 3,
+      title: 'AWS Academy Certificate',
+      issuer: 'AWS Academy',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_aws-cloud-certificate-activity-7457749536405377024-1IoV'
+    },
+    {
+      id: 4,
+      title: 'Front-end Dev with JavaScript',
+      issuer: 'TASK',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_frontenddevelopment-javascript-webdevelopment-activity-7453836102500659200-5oRg'
+    },
+    {
+      id: 5,
+      title: 'Data Engineer Certificate',
+      issuer: 'AICTE',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_data-engineer-certificate-by-aicte-activity-7419738026299445249-bEeW'
+    },
+    {
+      id: 6,
+      title: 'Deloitte Data Analytics Certificate',
+      issuer: 'Deloitte',
+      link: 'https://www.linkedin.com/posts/saiharishpuchala_deloitte-data-analytics-job-certificate-activity-7354940656160559104-ypEq'
+    }
+  ]
 };

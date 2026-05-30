@@ -14,7 +14,7 @@ export const Projects = () => {
           className="section-header"
         >
           <span className="section-label"><ExternalLink size={14} /> Selected Works</span>
-          <h2 className="section-title">Featured<br/>Projects</h2>
+          <h2 className="section-title">Featured Projects</h2>
           <p className="section-desc">Showcasing engineering excellence and scalable architecture.</p>
         </div>
 

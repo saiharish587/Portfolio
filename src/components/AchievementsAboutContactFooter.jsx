@@ -49,7 +49,7 @@ export const Achievements = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="section-label"><Trophy size={14} /> Milestones</span>
-          <h2 className="section-title">Notable<br/>Achievements</h2>
+          <h2 className="section-title">Notable Achievements</h2>
         </motion.div>
 
         <motion.div
@@ -99,7 +99,7 @@ export const About = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="section-label"><User size={14} /> Identity</span>
-          <h2 className="section-title">About<br/>Me</h2>
+          <h2 className="section-title">About Me</h2>
         </motion.div>
 
         <motion.div
