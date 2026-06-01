@@ -107,7 +107,7 @@ export const portfolioData = {
     {
       school: 'Sri Chaitanya Jr Kalashala',
       degree: 'Intermediate',
-      details: 'IDPL, Telangana, India • Graduated 2027'
+      details: 'IDPL, Telangana, India • Graduated 2023'
     },
     {
       school: 'B V Raju Institute of Technology',
