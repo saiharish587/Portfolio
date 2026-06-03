@@ -75,16 +75,24 @@ export const portfolioData = {
   ],
   skills: [
     {
+      category: 'Languages',
+      items: ['JavaScript', 'Python', 'SQL', 'HTML', 'CSS']
+    },
+    {
       category: 'Frontend Development',
-      items: ['React.js', 'HTML5', 'CSS3', 'JavaScript (ES6+)', 'Tailwind CSS']
+      items: ['React.js', 'Next.js', 'Tailwind CSS']
     },
     {
-      category: 'Backend & Database',
-      items: ['Python', 'Firebase', 'JavaScript', 'MySQL', 'Java']
+      category: 'Backend & Databases',
+      items: ['Node.js', 'REST APIs', 'Firebase', 'MySQL/PostgreSQL']
     },
     {
-      category: 'Design & Tools',
-      items: ['UI/UX Design', 'Responsive Design', 'Git', 'REST APIs', 'Cloud Computing']
+      category: 'Machine Learning',
+      items: ['Supervised Learning', 'NLP']
+    },
+    {
+      category: 'Tools & Cloud',
+      items: ['Git', 'GitHub Actions', 'CI/CD', 'AWS', 'Figma']
     }
   ],
   experience: {
