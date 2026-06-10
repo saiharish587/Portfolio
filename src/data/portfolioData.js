@@ -108,9 +108,9 @@ export const portfolioData = {
   },
   education: [
     {
-      school: 'M B Grammar High School',
-      degree: '10th Grade',
-      details: 'Hyderabad, Telangana, India • Graduated 2021'
+      school: 'B V Raju Institute of Technology',
+      degree: 'B.Tech in Data Science',
+      details: 'Narsapur, Telangana, India • Expected Apr 2027'
     },
     {
       school: 'Sri Chaitanya Jr Kalashala',
@@ -118,9 +118,9 @@ export const portfolioData = {
       details: 'IDPL, Telangana, India • Graduated 2023'
     },
     {
-      school: 'B V Raju Institute of Technology',
-      degree: 'B.Tech in Data Science',
-      details: 'Narsapur, Telangana, India • Expected Apr 2027'
+      school: 'M B Grammar High School',
+      degree: '10th Grade',
+      details: 'Hyderabad, Telangana, India • Graduated 2021'
     },
     {
       title: 'Certifications',
