@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
 import { Trophy, Star, Award, Code2, Cpu, Globe, User, MessageSquare, Mail } from 'lucide-react';
+import { isValidUrl, safeWindowOpen } from '../utils/securityUtils';
 
 const GithubIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -135,6 +136,22 @@ export const About = () => {
 export const Contact = () => {
   const { contact } = portfolioData;
 
+  // SECURITY: Handle mailto links securely
+  const handleEmailClick = (e) => {
+    if (!isValidUrl(`mailto:${contact.email}`)) {
+      e.preventDefault();
+      console.warn('Invalid email address');
+    }
+  };
+
+  // SECURITY: Handle social link clicks safely
+  const handleSocialClick = (e, url) => {
+    if (!isValidUrl(url)) {
+      e.preventDefault();
+      console.warn('Invalid URL blocked:', url);
+    }
+  };
+
   return (
     <section id="contact">
       <div className="container">
@@ -155,16 +172,33 @@ export const Contact = () => {
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <a href={`mailto:${contact.email}`} className="btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
+            <a 
+              href={`mailto:${contact.email}`} 
+              className="btn-primary" 
+              onClick={handleEmailClick}
+              style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}
+            >
               <Mail size={20} /> Drop an Email
             </a>
           </div>
 
           <div className="social-links" style={{ marginTop: '4rem', marginBottom: '0' }}>
-            <a href={contact.socials[0].url} className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a 
+              href={contact.socials[0].url} 
+              className="social-icon" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={(e) => handleSocialClick(e, contact.socials[0].url)}
+            >
               <GithubIcon />
             </a>
-            <a href={contact.socials[1].url} className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a 
+              href={contact.socials[1].url} 
+              className="social-icon" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={(e) => handleSocialClick(e, contact.socials[1].url)}
+            >
               <LinkedinIcon />
             </a>
           </div>
@@ -191,3 +225,4 @@ export const Footer = () => {
     </motion.footer>
   );
 };
+

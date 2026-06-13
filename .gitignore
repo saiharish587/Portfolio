@@ -22,3 +22,48 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables - SECURITY CRITICAL
+.env
+.env.local
+.env.*.local
+.env.*.example
+!.env.example
+
+# Sensitive files and directories
+.ssh
+.gpg
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+secrets/
+private/
+credentials/
+
+# OS-specific files
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# IDE settings that might contain secrets
+.vscode/settings.json
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+
+# Build artifacts that shouldn't be committed
+build/
+*.tsbuildinfo
+
+# Source maps in production (sensitive)
+dist/**/*.map
+dist/**/*.js.map
+
+# System files
+.env.backup
+config.backup.*

@@ -1,0 +1,88 @@
+# Netlify Configuration with Security Hardening
+# Last updated: 2026-06-13
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "functions"
+
+# Development environment variables
+[build.environment]
+  NODE_ENV = "production"
+
+# Security headers configuration
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Strict-Transport-Security: Enforce HTTPS for 1 year including subdomains
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content-Security-Policy: Strict policy to prevent XSS and injection attacks
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    
+    # X-Frame-Options: Prevent clickjacking by disallowing embedding in frames
+    X-Frame-Options = "DENY"
+    
+    # X-Content-Type-Options: Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # X-XSS-Protection: Legacy XSS protection (some browsers still support)
+    X-XSS-Protection = "1; mode=block"
+    
+    # Referrer-Policy: Control referrer information leakage
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Permissions-Policy: Control browser features and API access
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()"
+    
+    # Feature-Policy (deprecated but included for compatibility)
+    Feature-Policy = "geolocation 'none'; microphone 'none'; camera 'none'; payment 'none'; usb 'none'; magnetometer 'none'; gyroscope 'none'; accelerometer 'none'; ambient-light-sensor 'none'"
+
+# Specific headers for static assets (cache busting)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Long cache for versioned assets
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com"
+
+# HTML files - no caching to ensure users get latest version
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+# Redirect HTTP to HTTPS (Netlify handles this automatically, but explicit for clarity)
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
+
+# Secure redirect for sensitive paths
+[[redirects]]
+  from = "/.git"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/.env*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/.env.local"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/.env.development"
+  to = "/404"
+  status = 404
+
+# Handle 404s gracefully
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

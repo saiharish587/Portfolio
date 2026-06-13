@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { isValidUrl, safeWindowOpen } from '../utils/securityUtils';
 import './ChromaGrid.css';
 
 export const ChromaGrid = ({
@@ -116,8 +117,9 @@ export const ChromaGrid = ({
   };
 
   const handleCardClick = url => {
-    if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
+    // SECURITY: Validate URL before opening
+    if (url && isValidUrl(url)) {
+      safeWindowOpen(url, '_blank');
     }
   };
 
@@ -151,7 +153,7 @@ export const ChromaGrid = ({
           style={{
             '--card-border': c.borderColor || 'transparent',
             '--card-gradient': c.gradient,
-            cursor: c.url ? 'pointer' : 'default'
+            cursor: c.url && isValidUrl(c.url) ? 'pointer' : 'default'
           }}
         >
           <div className="chroma-img-wrapper">
@@ -172,3 +174,4 @@ export const ChromaGrid = ({
 };
 
 export default ChromaGrid;
+

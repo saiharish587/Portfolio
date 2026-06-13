@@ -1,11 +1,20 @@
 import TiltedCard from './TiltedCard';
 import { portfolioData } from '../data/portfolioData';
 import { ExternalLink } from 'lucide-react';
+import { isValidUrl } from '../utils/securityUtils';
 
 export const Projects = () => {
   const { projects } = portfolioData;
 
   const projectCards = projects;
+
+  // SECURITY: Validate project links before rendering
+  const handleProjectClick = (e, link) => {
+    if (!isValidUrl(link)) {
+      e.preventDefault();
+      console.warn('Invalid project URL blocked:', link);
+    }
+  };
 
   return (
     <section id="projects">
@@ -25,6 +34,7 @@ export const Projects = () => {
               href={project.link}
               target="_blank"
               rel="noreferrer noopener"
+              onClick={(e) => handleProjectClick(e, project.link)}
               className="featured-project-link glass-card"
             >
               <TiltedCard
