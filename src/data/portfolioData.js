@@ -41,7 +41,7 @@ export const portfolioData = {
     {
       id: 3,
       icon: 'Eye',
-      title: 'HAWK - Surveillance System',
+      title: 'HAWK - AI Assistant',
       desc: 'Advanced surveillance and monitoring system with real-time alerting capabilities. Features video stream processing, anomaly detection, and comprehensive logging.',
       category: 'Security & Monitoring',
       stack: ['React', 'Python', 'OpenCV', 'WebSocket'],
