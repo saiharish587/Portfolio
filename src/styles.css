@@ -520,11 +520,11 @@ section {
 .cert-card { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; min-height: 96px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
 .cert-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.18); }
 .cert-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#000000; background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(255,255,255,0.9)); box-shadow: 0 6px 18px rgba(212,175,55,0.2); flex: 0 0 44px; }
-.cert-body { display:flex; flex-direction: column; gap: 0.25rem; align-items: flex-start; flex: 1 1 auto; }
-.cert-title { font-size: 0.95rem; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cert-issuer { color: var(--text-secondary); font-size: 0.85rem; }
-.cert-btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--text-primary); padding: 0.45rem 0.8rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; margin-left: auto; }
-.cert-btn:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.18); }
+.cert-body { display:flex; flex-direction: column; gap: 0.25rem; align-items: flex-start; flex: 1 1 auto; min-width: 0; }
+.cert-title { font-size: 0.95rem; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.cert-issuer { color: var(--text-secondary); font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.cert-btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--text-primary); padding: 0.45rem 0.8rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; margin-left: auto; flex-shrink: 0; }
+.cert-btn:hover { background: rgba(212, 175, 55, 0.06); border-color: rgba(212, 175, 55, 0.18); }
 
 /* push education content slightly down so it lines up with certifications grid */
 .edu-column { padding-top: 0.6rem; }
