@@ -25,7 +25,7 @@ export const portfolioData = {
       stack: ['React', 'Firebase', 'Tailwind CSS', 'JavaScript'],
       link: 'https://github.com/saiharish587/Chaff.git',
       image: chaffImage,
-      color: '#10B981'
+      color: '#d4af37'
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ export const portfolioData = {
       stack: ['React', 'Firebase', 'Maps API', 'JavaScript'],
       link: 'https://github.com/saiharish587/contact-tracing.git',
       image: contactTracingImage,
-      color: '#EF4444'
+      color: '#ffffff'
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ export const portfolioData = {
       stack: ['React', 'Python', 'OpenCV', 'WebSocket'],
       link: 'https://github.com/saiharish587/HAWK.git',
       image: hawkImage,
-      color: '#1F2937'
+      color: '#1c1c1c'
     },
     {
       id: 4,
@@ -58,7 +58,7 @@ export const portfolioData = {
       stack: ['React', 'Python', 'TensorFlow', 'NLP'],
       link: 'https://github.com/saiharish587/Orbius-AI.git',
       image: orbiusAIImage,
-      color: '#6366F1'
+      color: '#a0a0a0'
     },
     {
       id: 5,
@@ -70,7 +70,7 @@ export const portfolioData = {
       stack: ['Python', 'NLP', 'Machine Learning', 'Web Scraping'],
       link: 'https://github.com/saiharish587/AI-Article-Processor.git',
       image: aiArticleProcessorImage,
-      color: '#8B5CF6'
+      color: '#d4af37'
     }
   ],
   skills: [

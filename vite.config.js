@@ -10,17 +10,6 @@ export default defineConfig({
     // Disable source maps in production to prevent information disclosure
     sourcemap: false,
     
-    // Minify build output to reduce attack surface
-    minify: 'terser',
-    
-    // Use terser with compression options
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console logs in production
-      },
-      mangle: true, // Mangle variable names for obfuscation
-    },
-    
     // Chunk size warnings
     chunkSizeWarningLimit: 500,
     
@@ -28,10 +17,18 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Prevent external script injection
-        manualChunks: {
-          'vendor': ['react', 'react-dom'],
-          'three': ['three', '@react-three/fiber', '@react-three/drei'],
-          'animation': ['framer-motion', 'motion', 'gsap', 'lenis'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'three';
+            }
+            if (id.includes('framer-motion') || id.includes('motion') || id.includes('gsap') || id.includes('lenis')) {
+              return 'animation';
+            }
+          }
         },
       },
     },

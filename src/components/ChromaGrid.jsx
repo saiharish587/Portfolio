@@ -52,8 +52,8 @@ export const ChromaGrid = ({
       title: 'Casey Park',
       subtitle: 'Data Scientist',
       handle: '@caseypark',
-      borderColor: '#EF4444',
-      gradient: 'linear-gradient(195deg, #EF4444, #000)',
+      borderColor: '#FFFFFF',
+      gradient: 'linear-gradient(195deg, #FFFFFF, #000000)',
       url: 'https://kaggle.com/'
     },
     {
@@ -61,8 +61,8 @@ export const ChromaGrid = ({
       title: 'Sam Kim',
       subtitle: 'Mobile Developer',
       handle: '@thesamkim',
-      borderColor: '#8B5CF6',
-      gradient: 'linear-gradient(225deg, #8B5CF6, #000)',
+      borderColor: '#D4AF37',
+      gradient: 'linear-gradient(225deg, #D4AF37, #000000)',
       url: 'https://github.com/'
     },
     {
@@ -70,8 +70,8 @@ export const ChromaGrid = ({
       title: 'Tyler Rodriguez',
       subtitle: 'Cloud Architect',
       handle: '@tylerrod',
-      borderColor: '#06B6D4',
-      gradient: 'linear-gradient(135deg, #06B6D4, #000)',
+      borderColor: '#A0A0A0',
+      gradient: 'linear-gradient(135deg, #A0A0A0, #000000)',
       url: 'https://aws.amazon.com/'
     }
   ];

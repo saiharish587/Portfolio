@@ -8,19 +8,19 @@
 
 :root {
   /* Exact Design System */
-  --bg: #050816;
-  --bg-2: #0f172a;
-  --accent: #8b5cf6;
-  --accent-hover: #a78bfa;
-  --accent-glow: #22d3ee;
+  --bg: #000000;
+  --bg-2: #0a0a0a;
+  --accent: #d4af37;
+  --accent-hover: #ffd700;
+  --accent-glow: #ffd700;
   
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
   
   /* Glassmorphism Constants */
-  --glass-bg: rgba(15, 23, 42, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-glow: rgba(139, 92, 246, 0.1);
+  --glass-bg: rgba(10, 10, 10, 0.5);
+  --glass-border: rgba(212, 175, 55, 0.15);
+  --glass-glow: rgba(212, 175, 55, 0.08);
   
   /* Typography */
   --font-display: 'Sora', sans-serif;
@@ -74,8 +74,8 @@ body::after {
   height: 100vh;
   z-index: -2;
   background: 
-    radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(34, 211, 238, 0.15), transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.12), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.08), transparent 25%);
   filter: blur(100px);
   pointer-events: none;
 }
@@ -142,7 +142,7 @@ p {
 }
 
 .glass-card {
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.6) 0%, rgba(5, 8, 22, 0.4) 100%);
+  background: linear-gradient(145deg, rgba(10, 10, 10, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
@@ -168,16 +168,16 @@ p {
 
 .glass-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 40px rgba(139, 92, 246, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 40px rgba(212, 175, 55, 0.1);
 }
 
 /* Buttons */
 .btn-primary {
   background: var(--accent);
-  color: var(--text-primary);
+  color: #000000;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   padding: 0.8rem 1.5rem;
   border-radius: 99px;
   border: none;
@@ -203,7 +203,7 @@ p {
 
 .btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
   transform: translateY(-2px);
 }
 
@@ -348,8 +348,8 @@ section {
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 99px;
   color: var(--accent-glow);
   font-size: 0.75rem;
@@ -425,7 +425,7 @@ section {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, rgba(139,92,246,0.2), rgba(34,211,238,0.1), transparent);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.2), rgba(255, 255, 255, 0.1), transparent);
   z-index: 0;
 }
 
@@ -518,13 +518,13 @@ section {
 }
 .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .cert-card { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; min-height: 96px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
-.cert-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(10,8,20,0.5), 0 0 40px rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.18); }
-.cert-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:white; background: linear-gradient(135deg, rgba(139,92,246,0.9), rgba(34,211,238,0.6)); box-shadow: 0 6px 18px rgba(139,92,246,0.12); flex: 0 0 44px; }
+.cert-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.18); }
+.cert-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#000000; background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(255,255,255,0.9)); box-shadow: 0 6px 18px rgba(212,175,55,0.2); flex: 0 0 44px; }
 .cert-body { display:flex; flex-direction: column; gap: 0.25rem; align-items: flex-start; flex: 1 1 auto; }
 .cert-title { font-size: 0.95rem; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cert-issuer { color: var(--text-secondary); font-size: 0.85rem; }
 .cert-btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--text-primary); padding: 0.45rem 0.8rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; margin-left: auto; }
-.cert-btn:hover { background: rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.18); }
+.cert-btn:hover { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.18); }
 
 /* push education content slightly down so it lines up with certifications grid */
 .edu-column { padding-top: 0.6rem; }
@@ -673,19 +673,19 @@ section {
   object-fit: cover;
   position: relative;
   z-index: 2;
-  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
   transition: all 0.3s ease;
 }
 
 .profile-image:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 80px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 30px 80px rgba(212, 175, 55, 0.5);
 }
 
 .image-glow {
   position: absolute;
   inset: -20px;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.4), transparent 60%);
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.4), transparent 60%);
   border-radius: 24px;
   z-index: 1;
   opacity: 0;
@@ -700,7 +700,7 @@ section {
 .image-border {
   position: absolute;
   inset: -3px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(34, 211, 238, 0.3));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.5), rgba(255, 255, 255, 0.3));
   border-radius: 24px;
   z-index: 0;
   opacity: 0;
@@ -1051,8 +1051,8 @@ section {
 }
 
 .skill-tag:hover {
-  background: rgba(139, 92, 246, 0.1);
-  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
   color: var(--text-primary);
   transform: translateY(-2px);
 }
@@ -1149,9 +1149,9 @@ footer {
 
 .social-icon:hover {
   background: var(--accent);
-  color: #fff;
+  color: #000;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
 /* Custom Cursor */
@@ -1159,7 +1159,7 @@ footer {
   position: fixed;
   top: 0; left: 0;
   width: 20px; height: 20px;
-  background: rgba(34, 211, 238, 0.4);
+  background: rgba(212, 175, 55, 0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -1170,8 +1170,8 @@ footer {
 
 .custom-cursor.hovering {
   width: 60px; height: 60px;
-  background: rgba(139, 92, 246, 0.2);
-  border: 1px solid rgba(139, 92, 246, 0.5);
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.5);
   backdrop-filter: blur(2px);
 }
 

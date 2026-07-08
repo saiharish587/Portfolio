@@ -19,7 +19,7 @@ const StarField = (props) => {
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-        <PointMaterial transparent color="#8b5cf6" size={0.005} sizeAttenuation={true} depthWrite={false} />
+        <PointMaterial transparent color="#d4af37" size={0.005} sizeAttenuation={true} depthWrite={false} />
       </Points>
     </group>
   );

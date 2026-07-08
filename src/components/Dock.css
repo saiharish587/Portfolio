@@ -31,7 +31,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(212, 175, 55, 0.08);
   border: 1px solid var(--glass-border);
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -44,8 +44,8 @@
 
 .dock-item:hover {
   color: var(--text-primary);
-  border-color: rgba(139, 92, 246, 0.5);
-  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.15);
 }
 
 .dock-item:focus-visible {
