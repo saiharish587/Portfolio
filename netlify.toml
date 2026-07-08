@@ -8,7 +8,8 @@
 
 # Development environment variables
 [build.environment]
-  NODE_ENV = "production"
+  NODE_VERSION = "22.12.0"
+  NPM_FLAGS = "--include=dev"
 
 # Security headers configuration
 [[headers]]
