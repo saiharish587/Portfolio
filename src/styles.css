@@ -1262,6 +1262,28 @@ footer {
    PROJECTS CUBE — 3D Cube Section
    ═══════════════════════════════════════════════════════════════ */
 
+/* Outer wrapper — ScrollTrigger pins this div */
+.cube-outer {
+  /* Must be at least viewport height so ScrollTrigger can pin it */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Avoid overflow clipping the pinned element */
+  overflow: visible;
+}
+
+/* Override section padding so cube-outer fills the screen */
+#projects {
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+#projects .container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 /* ── Toggle Row ───────────────────────────────────────────────── */
 .cube-toggle-row {
   display: flex;
@@ -1322,7 +1344,9 @@ footer {
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
-  min-height: 520px;
+  min-height: 440px;
+  /* Keep layout inside the pinned viewport */
+  max-height: 60vh;
 }
 
 /* ── Left: Description panel ─────────────────────────────────── */
@@ -1333,11 +1357,13 @@ footer {
 }
 
 .cube-desc-card {
-  padding: 2rem 2.2rem;
+  padding: 1.6rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  min-height: 340px;
+  gap: 0.75rem;
+  min-height: 280px;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .cube-empty-slot {
