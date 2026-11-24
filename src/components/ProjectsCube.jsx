@@ -2,36 +2,37 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, ChevronDown, Zap, ZapOff } from 'lucide-react';
+import { ExternalLink, ChevronDown } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Cube face CSS transforms for a given size ───────────────────────────────
+// ─── Cube face CSS transforms ────────────────────────────────────────────────
 const faceTransforms = (size) => [
-  `translateZ(${size / 2}px)`,                        // 0  front
-  `rotateY( 90deg) translateZ(${size / 2}px)`,        // 1  right
-  `rotateY(180deg) translateZ(${size / 2}px)`,        // 2  back
-  `rotateY(-90deg) translateZ(${size / 2}px)`,        // 3  left
-  `rotateX( 90deg) translateZ(${size / 2}px)`,        // 4  top
-  `rotateX(-90deg) translateZ(${size / 2}px)`,        // 5  bottom
+  `translateZ(${size / 2}px)`,
+  `rotateY( 90deg) translateZ(${size / 2}px)`,
+  `rotateY(180deg) translateZ(${size / 2}px)`,
+  `rotateY(-90deg) translateZ(${size / 2}px)`,
+  `rotateX( 90deg) translateZ(${size / 2}px)`,
+  `rotateX(-90deg) translateZ(${size / 2}px)`,
 ];
 
-// ─── Rotation targets — smooth dice-tumble sequence ──────────────────────────
+// ─── Dice-tumble rotation sequence ───────────────────────────────────────────
+// Note on CSS 3D coordinates: +X right, +Y down, +Z towards viewer.
+// faceTransforms[4] (AI-Article-Processor) is rotateX(90deg) -> top (-Y), so cube needs rotationX: -90 to face front.
+// faceTransforms[5] (Empty / Coming Soon) is rotateX(-90deg) -> bottom (+Y), so cube needs rotationX: 90 to face front.
 const ROTATION_SEQUENCE = [
-  { rotationX:   0, rotationY:    0 },   // face 0  front
-  { rotationX:   0, rotationY:  -90 },   // face 1  right
-  { rotationX:   0, rotationY: -180 },   // face 2  back
-  { rotationX:   0, rotationY: -270 },   // face 3  left
-  { rotationX:  90, rotationY:    0 },   // face 4  top
-  { rotationX: -90, rotationY:    0 },   // face 5  bottom (empty)
+  { rotationX:   0, rotationY:    0 },   // 0: front
+  { rotationX:   0, rotationY:  -90 },   // 1: right
+  { rotationX:   0, rotationY: -180 },   // 2: back
+  { rotationX:   0, rotationY: -270 },   // 3: left
+  { rotationX: -90, rotationY: -360 },   // 4: top (AI-Article-Processor)
+  { rotationX:  90, rotationY: -360 },   // 5: bottom (Coming Soon)
 ];
 
-const TOTAL_FACES = 6;
-// How many viewport-heights of scroll space each face gets
-const SCROLL_PER_FACE = 1.0;
+const TOTAL_FACES      = 6;
+const SCROLL_PER_FACE  = 1.0; // viewport-heights of scroll per face
 
-// ─── Build padded face array (5 projects + 1 empty) ──────────────────────────
 const buildFaces = (projects) => {
   const out = projects.slice(0, 5).map((p, i) => ({
     id: `proj-${i}`,
@@ -43,46 +44,52 @@ const buildFaces = (projects) => {
     image:    p.image,
     color:    p.color,
   }));
-  out.push({
-    id: 'empty', title: '', desc: '', category: '',
-    stack: [], link: '#', image: null, color: '#1c1c1c',
-  });
+  out.push({ id: 'empty', title: '', desc: '', category: '', stack: [], link: '#', image: null, color: '#1c1c1c' });
   return out;
 };
+
+// ─── iOS-style toggle switch ──────────────────────────────────────────────────
+const ToggleSwitch = ({ on, onToggle }) => (
+  <div className="cube-toggle-switch" onClick={onToggle} role="switch" aria-checked={on} tabIndex={0}
+    onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onToggle()}>
+    <span className="cube-toggle-switch__label">{on ? 'Cube On' : 'Cube Off'}</span>
+    <div className={`cube-toggle-switch__track${on ? ' on' : ''}`}>
+      <div className="cube-toggle-switch__thumb" />
+    </div>
+  </div>
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
 export const ProjectsCube = () => {
   const { projects } = portfolioData;
   const faces = buildFaces(projects);
 
-  // DOM refs
-  const outerRef  = useRef(null);   // the pinned section wrapper
-  const cubeRef   = useRef(null);   // the 3-D cube element
-  const stRef     = useRef(null);   // ScrollTrigger instance
-
-  // face tracking ref (no re-render required)
+  const outerRef       = useRef(null);
+  const cubeRef        = useRef(null);
+  const stRef          = useRef(null);
   const currentFaceRef = useRef(-1);
+  const descTimerRef   = useRef(null);
 
-  // React state
-  const [activeFace,   setActiveFace]   = useState(0);
-  const [cubeMode,     setCubeMode]     = useState(true);
-  const [descVisible,  setDescVisible]  = useState(true);
+  const [activeFace,  setActiveFace]  = useState(0);
+  const [cubeMode,    setCubeMode]    = useState(true);
+  const [descVisible, setDescVisible] = useState(true);
 
-  // ── Update cube face geometry on resize ────────────────────────────────────
+  // ── Face geometry ────────────────────────────────────────────────────────
   const updateFaceGeometry = useCallback(() => {
     if (!cubeRef.current) return;
-    const size = Math.min(window.innerWidth * 0.38, 380);
+    // cube takes ~40% of viewport width, capped at 360px
+    const size = Math.min(window.innerWidth * 0.40, 360);
     cubeRef.current.style.setProperty('--cube-size', `${size}px`);
-    const transforms = faceTransforms(size);
-    Array.from(cubeRef.current.children).forEach((face, i) => {
-      face.style.transform = transforms[i];
+    faceTransforms(size).forEach((t, i) => {
+      const face = cubeRef.current.children[i];
+      if (face) face.style.transform = t;
     });
   }, []);
 
-  // ── Animate cube to a rotation target ──────────────────────────────────────
-  const rotateTo = useCallback((faceIdx) => {
+  // ── Cube rotation ────────────────────────────────────────────────────────
+  const rotateTo = useCallback((idx) => {
     if (!cubeRef.current) return;
-    const t = ROTATION_SEQUENCE[faceIdx];
+    const t = ROTATION_SEQUENCE[idx];
     gsap.to(cubeRef.current, {
       rotationX: t.rotationX,
       rotationY: t.rotationY,
@@ -92,40 +99,30 @@ export const ProjectsCube = () => {
     });
   }, []);
 
-  // ── Wire up (or tear down) GSAP ScrollTrigger ──────────────────────────────
+  // ── ScrollTrigger setup ──────────────────────────────────────────────────
   useEffect(() => {
-    // Always kill previous instance first
-    if (stRef.current) {
-      stRef.current.kill();
-      stRef.current = null;
-    }
-
+    if (stRef.current) { stRef.current.kill(); stRef.current = null; }
     if (!cubeMode || !outerRef.current || !cubeRef.current) return;
 
     updateFaceGeometry();
 
-    // Total extra scroll distance for all 6 faces
     const totalExtra = window.innerHeight * SCROLL_PER_FACE * TOTAL_FACES;
 
     stRef.current = ScrollTrigger.create({
       trigger:       outerRef.current,
       start:         'top top',
       end:           `+=${totalExtra}`,
-      pin:           true,       // ← pins the section while user scrolls through extra space
-      pinSpacing:    true,       // ← adds real scroll space below section
-      anticipatePin: 1,          // ← reduces lag / flicker on pin
+      pin:           true,
+      pinSpacing:    true,
+      anticipatePin: 1,
       onUpdate(self) {
-        // Map scroll progress (0→1) to face index (0→5)
-        const raw  = self.progress * TOTAL_FACES;
-        const step = Math.min(TOTAL_FACES - 1, Math.floor(raw));
-
-        if (step === currentFaceRef.current) return;   // no change
+        const step = Math.min(TOTAL_FACES - 1, Math.floor(self.progress * TOTAL_FACES));
+        if (step === currentFaceRef.current) return;
         currentFaceRef.current = step;
-
-        // Fade description out, rotate cube, fade description back in
+        if (descTimerRef.current) clearTimeout(descTimerRef.current);
         setDescVisible(false);
         rotateTo(step);
-        setTimeout(() => {
+        descTimerRef.current = setTimeout(() => {
           setActiveFace(step);
           setDescVisible(true);
         }, 320);
@@ -133,105 +130,74 @@ export const ProjectsCube = () => {
     });
 
     window.addEventListener('resize', updateFaceGeometry);
-
     return () => {
-      stRef.current?.kill();
-      stRef.current = null;
+      if (descTimerRef.current) clearTimeout(descTimerRef.current);
+      stRef.current?.kill(); stRef.current = null;
       window.removeEventListener('resize', updateFaceGeometry);
     };
   }, [cubeMode, updateFaceGeometry, rotateTo]);
 
-  // ── Toggle between cube mode and normal scroll ─────────────────────────────
+  // ── Toggle ───────────────────────────────────────────────────────────────
   const handleToggle = () => {
-    // Kill ScrollTrigger before toggling to avoid state clash
-    if (stRef.current) {
-      stRef.current.kill();
-      stRef.current = null;
-    }
-    // Reset cube orientation
+    if (descTimerRef.current) clearTimeout(descTimerRef.current);
+    stRef.current?.kill(); stRef.current = null;
     currentFaceRef.current = -1;
     setActiveFace(0);
     setDescVisible(true);
-    if (cubeRef.current) {
-      gsap.set(cubeRef.current, { rotationX: 0, rotationY: 0 });
-    }
+    if (cubeRef.current) gsap.set(cubeRef.current, { rotationX: 0, rotationY: 0 });
     setCubeMode(prev => !prev);
-    // Let ScrollTrigger recalculate after DOM settles
-    setTimeout(() => ScrollTrigger.refresh(), 100);
+    setTimeout(() => ScrollTrigger.refresh(), 120);
   };
 
-  // ── Skip to next section ───────────────────────────────────────────────────
-  const handleSkip = () => {
+  const handleSkip = () =>
     document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const activeProject = faces[activeFace];
   const isEmpty       = activeProject?.id === 'empty';
 
-  // ─── Render ─────────────────────────────────────────────────────────────────
   return (
     <section id="projects">
-      {/*
-        outerRef is what ScrollTrigger pins.
-        In skip mode this is a normal div with no pinning.
-      */}
       <div ref={outerRef} className="cube-outer">
-        <div className="container">
+        <div className="container cube-container">
 
-          {/* Section header */}
-          <div className="section-header" style={{ position: 'relative', zIndex: 2 }}>
-            <span className="section-label">
-              <ExternalLink size={14} /> Selected Works
-            </span>
-            <h2 className="section-title">Featured Projects</h2>
-            <p className="section-desc">
-              Showcasing engineering excellence and scalable architecture.
-            </p>
+          {/* ── Compact top bar ── */}
+          <div className="cube-topbar">
+            <div className="cube-topbar__left">
+              <span className="section-label" style={{ marginBottom: 0 }}>
+                <ExternalLink size={13} /> Selected Works
+              </span>
+              <h2 className="cube-section-title">Featured Projects</h2>
+            </div>
+            <div className="cube-topbar__right">
+              <ToggleSwitch on={cubeMode} onToggle={handleToggle} />
+              {cubeMode && (
+                <button className="cube-skip-btn" onClick={handleSkip}>
+                  Skip <ChevronDown size={13} />
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Toggle + Skip row */}
-          <div className="cube-toggle-row" style={{ position: 'relative', zIndex: 2 }}>
-            <button
-              className={`cube-toggle-btn${cubeMode ? ' active' : ''}`}
-              onClick={handleToggle}
-            >
-              {cubeMode
-                ? <><Zap size={15} /> Cube Mode — scroll to explore</>
-                : <><ZapOff size={15} /> Skip Mode — cube disabled</>}
-            </button>
-            {cubeMode && (
-              <button className="cube-skip-btn" onClick={handleSkip}>
-                Skip section <ChevronDown size={15} />
-              </button>
-            )}
-          </div>
-
-          {/* Two-column layout */}
+          {/* ── Main layout ── */}
           <div className="cube-layout">
 
-            {/* ── Left: description panel ── */}
+            {/* Left: description */}
             <div className="cube-desc-panel">
               <AnimatePresence mode="wait">
                 {!isEmpty ? (
                   <motion.div
                     key={activeProject.id}
-                    initial={{ opacity: 0, x: -24 }}
-                    animate={{ opacity: descVisible ? 1 : 0, x: descVisible ? 0 : -12 }}
-                    exit={{ opacity: 0, x: -24 }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: descVisible ? 1 : 0, x: descVisible ? 0 : -10 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="cube-desc-card glass-card"
                   >
-                    {/* Face-dot progress indicator */}
+                    {/* Progress dots */}
                     <div className="cube-face-indicator">
                       {faces.map((f, i) => (
-                        <span
-                          key={i}
-                          className={[
-                            'cube-face-dot',
-                            i === activeFace ? 'active' : '',
-                            f.id === 'empty' ? 'empty' : '',
-                          ].join(' ')}
-                        />
+                        <span key={i}
+                          className={['cube-face-dot', i === activeFace ? 'active' : '', f.id === 'empty' ? 'empty' : ''].join(' ')} />
                       ))}
                     </div>
 
@@ -240,45 +206,28 @@ export const ProjectsCube = () => {
                     <p className="cube-desc-body">{activeProject.desc}</p>
 
                     <div className="cube-desc-stack">
-                      {activeProject.stack.map(s => (
-                        <span key={s} className="skill-tag">{s}</span>
-                      ))}
+                      {activeProject.stack.map(s => <span key={s} className="skill-tag">{s}</span>)}
                     </div>
 
                     {activeProject.link && activeProject.link !== '#' && (
-                      <a
-                        href={activeProject.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary cube-desc-cta"
-                      >
-                        <ExternalLink size={14} /> View Project
+                      <a href={activeProject.link} target="_blank" rel="noopener noreferrer"
+                        className="btn-primary cube-desc-cta">
+                        <ExternalLink size={13} /> View Project
                       </a>
                     )}
                   </motion.div>
                 ) : (
-                  <motion.div
-                    key="empty-slot"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="cube-desc-card glass-card cube-empty-slot"
-                  >
+                  <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    className="cube-desc-card glass-card cube-empty-slot">
                     <div className="cube-face-indicator">
                       {faces.map((f, i) => (
-                        <span
-                          key={i}
-                          className={[
-                            'cube-face-dot',
-                            i === activeFace ? 'active' : '',
-                            f.id === 'empty' ? 'empty' : '',
-                          ].join(' ')}
-                        />
+                        <span key={i}
+                          className={['cube-face-dot', i === activeFace ? 'active' : '', f.id === 'empty' ? 'empty' : ''].join(' ')} />
                       ))}
                     </div>
                     <span className="cube-empty-label">Coming Soon</span>
-                    <p className="cube-desc-body" style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                      This face is reserved for a future project. Check back soon!
+                    <p className="cube-desc-body" style={{ color: 'var(--text-secondary)', marginTop: '0.4rem' }}>
+                      This face is reserved for a future project.
                     </p>
                   </motion.div>
                 )}
@@ -287,38 +236,23 @@ export const ProjectsCube = () => {
               {cubeMode && (
                 <p className="cube-scroll-hint">
                   {activeFace < 5
-                    ? `Face ${activeFace + 1} / 6 — keep scrolling to rotate`
-                    : 'All faces seen — scroll down to continue ↓'}
+                    ? `${activeFace + 1} / 6 — scroll to rotate`
+                    : 'All faces seen — scroll to continue ↓'}
                 </p>
               )}
             </div>
 
-            {/* ── Right: 3-D cube ── */}
+            {/* Right: 3-D cube */}
             <div className="cube-scene-panel">
               <div className="cube-perspective-wrapper">
-                <div
-                  ref={cubeRef}
-                  className="cube-3d"
-                  style={{ '--cube-size': '340px' }}
-                >
+                <div ref={cubeRef} className="cube-3d" style={{ '--cube-size': '340px' }}>
                   {faces.map((face, i) => (
-                    <div
-                      key={face.id}
-                      className={[
-                        'cube-face',
-                        i === activeFace ? 'cube-face--active' : '',
-                        face.id === 'empty' ? 'cube-face--empty' : '',
-                      ].join(' ')}
-                      style={{ '--face-accent': face.color || 'var(--accent)' }}
-                    >
+                    <div key={face.id}
+                      className={['cube-face', i === activeFace ? 'cube-face--active' : '', face.id === 'empty' ? 'cube-face--empty' : ''].join(' ')}
+                      style={{ '--face-accent': face.color || 'var(--accent)' }}>
                       {face.image ? (
                         <>
-                          <img
-                            src={face.image}
-                            alt={face.title}
-                            className="cube-face-img"
-                            loading="eager"
-                          />
+                          <img src={face.image} alt={face.title} className="cube-face-img" loading="eager" />
                           <div className="cube-face-overlay" />
                           <div className="cube-face-label">
                             <span className="cube-face-label-title">{face.title}</span>
@@ -334,14 +268,12 @@ export const ProjectsCube = () => {
                     </div>
                   ))}
                 </div>
-
-                {/* Ambient ground glow */}
                 <div className="cube-glow" />
               </div>
             </div>
 
           </div>{/* .cube-layout */}
-        </div>{/* .container */}
+        </div>{/* .cube-container */}
       </div>{/* .cube-outer */}
     </section>
   );

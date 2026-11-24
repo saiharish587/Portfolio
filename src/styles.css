@@ -1262,108 +1262,173 @@ footer {
    PROJECTS CUBE — 3D Cube Section
    ═══════════════════════════════════════════════════════════════ */
 
-/* Outer wrapper — ScrollTrigger pins this div */
-.cube-outer {
-  /* Must be at least viewport height so ScrollTrigger can pin it */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* Avoid overflow clipping the pinned element */
-  overflow: visible;
-}
-
-/* Override section padding so cube-outer fills the screen */
+/* ── Section: no extra padding, full viewport height ─────────── */
 #projects {
   padding: 0 !important;
   overflow: visible !important;
 }
 
-#projects .container {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+.cube-outer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
 }
 
-/* ── Toggle Row ───────────────────────────────────────────────── */
-.cube-toggle-row {
+/* Container takes all space and distributes vertically */
+.cube-container {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 1.8rem !important;
+  padding-bottom: 1.2rem !important;
+  gap: 0.75rem;
+}
+
+/* ── Compact top bar: title left | toggle + skip right ────────── */
+.cube-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.cube-topbar__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Smaller title so cube gets more room */
+.cube-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.cube-topbar__right {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
-.cube-toggle-btn {
-  display: inline-flex;
+/* ── iOS-style toggle switch ─────────────────────────────────── */
+.cube-toggle-switch {
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  font-weight: 500;
+  gap: 0.6rem;
   cursor: pointer;
-  transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  user-select: none;
+  outline: none;
 }
-.cube-toggle-btn.active {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(212, 175, 55, 0.08);
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+.cube-toggle-switch:focus-visible .cube-toggle-switch__track {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
-.cube-toggle-btn:hover {
+
+.cube-toggle-switch__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  transition: color 0.25s;
+  min-width: 56px;
+  text-align: right;
+}
+
+/* Track */
+.cube-toggle-switch__track {
+  width: 50px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  flex-shrink: 0;
+}
+.cube-toggle-switch__track.on {
+  background: rgba(212, 175, 55, 0.25);
   border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Thumb */
+.cube-toggle-switch__thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%) translateX(0);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.cube-toggle-switch__track.on .cube-toggle-switch__thumb {
+  transform: translateY(-50%) translateX(22px);
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
+/* Label changes colour when on */
+.cube-toggle-switch__track.on + .cube-toggle-switch__label,
+.cube-toggle-switch:has(.cube-toggle-switch__track.on) .cube-toggle-switch__label {
   color: var(--accent);
 }
 
 .cube-skip-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: transparent;
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 .cube-skip-btn:hover {
   color: var(--text-primary);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* ── Main two-column layout ───────────────────────────────────── */
+/* ── Main two-column layout: fills remaining height ───────────── */
 .cube-layout {
+  flex: 1;               /* takes all leftover height in flex column */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: center;
-  min-height: 440px;
-  /* Keep layout inside the pinned viewport */
-  max-height: 60vh;
+  min-height: 0;         /* allow shrinking inside flex */
+  overflow: hidden;
 }
 
 /* ── Left: Description panel ─────────────────────────────────── */
 .cube-desc-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.6rem;
+  height: 100%;
+  justify-content: center;
 }
 
 .cube-desc-card {
-  padding: 1.6rem 2rem;
+  padding: 1.5rem 1.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  min-height: 280px;
-  max-height: 50vh;
-  overflow: auto;
+  gap: 0.6rem;
+  overflow: hidden;
 }
 
 .cube-empty-slot {
@@ -1373,7 +1438,7 @@ footer {
   opacity: 0.6;
 }
 .cube-empty-label {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.05em;
@@ -1383,27 +1448,27 @@ footer {
 .cube-face-indicator {
   display: flex;
   gap: 0.4rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 .cube-face-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 .cube-face-dot.active {
   background: var(--accent);
-  transform: scale(1.35);
-  box-shadow: 0 0 8px rgba(212,175,55,0.5);
+  transform: scale(1.4);
+  box-shadow: 0 0 7px rgba(212, 175, 55, 0.5);
 }
 .cube-face-dot.empty {
-  border: 1px dashed rgba(255,255,255,0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   background: transparent;
 }
 
 .cube-desc-category {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1412,41 +1477,46 @@ footer {
 
 .cube-desc-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
+  margin: 0;
 }
 
 .cube-desc-body {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.65;
+  /* Clamp description to 3 lines so it doesn't push other elements off */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cube-desc-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.25rem;
+  gap: 0.3rem;
 }
 
 .cube-desc-cta {
   align-self: flex-start;
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  padding: 0.55rem 1.3rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 1.1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }
 
 .cube-scroll-hint {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.28);
   letter-spacing: 0.04em;
-  text-align: center;
-  padding: 0.3rem 0;
+  text-align: left;
+  padding: 0.2rem 0;
 }
 
 /* ── Right: Cube scene ────────────────────────────────────────── */
@@ -1455,10 +1525,11 @@ footer {
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 100%;
 }
 
 .cube-perspective-wrapper {
-  perspective: 900px;
+  perspective: 1000px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -1471,7 +1542,6 @@ footer {
   height: var(--cube-size, 340px);
   position: relative;
   transform-style: preserve-3d;
-  /* Initial orientation: slight aesthetic tilt */
   transform: rotateX(0deg) rotateY(0deg);
   transform-origin: center center;
   will-change: transform;
@@ -1483,25 +1553,25 @@ footer {
   inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 8px 32px rgba(0,0,0,0.5);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.5);
   background: #0d0d0d;
-  transition: border-color 0.4s;
+  transition: border-color 0.4s, box-shadow 0.4s;
 }
-
 .cube-face--active {
-  border-color: rgba(212, 175, 55, 0.6);
+  border-color: rgba(212, 175, 55, 0.65);
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,0.1),
-    0 0 30px rgba(212, 175, 55, 0.2),
+    0 0 28px rgba(212, 175, 55, 0.22),
     0 8px 32px rgba(0,0,0,0.5);
 }
+
+/* Images always visible */
+.cube-face img { opacity: 1; }
 
 .cube-face-img {
   position: absolute;
@@ -1509,53 +1579,33 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.cube-face-img[data-loaded="true"],
-.cube-face-img.loaded {
-  opacity: 1;
-}
-
-/* Force images to show on load */
-.cube-face img {
-  opacity: 1;
 }
 
 .cube-face-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.78) 0%,
-    rgba(0,0,0,0.25) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
 }
 
 .cube-face-label {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 1.2rem;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.9rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   z-index: 2;
 }
-
 .cube-face-label-title {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #fff;
   text-shadow: 0 1px 4px rgba(0,0,0,0.6);
   line-height: 1.2;
 }
-
 .cube-face-label-cat {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1564,81 +1614,62 @@ footer {
 
 /* ── Empty face ──────────────────────────────────────────────── */
 .cube-face--empty {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,0.02) 0px,
-    rgba(255,255,255,0.02) 1px,
-    transparent 1px,
-    transparent 10px
-  );
+  background: repeating-linear-gradient(45deg,
+    rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px,
+    transparent 1px, transparent 10px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .cube-face-empty-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   opacity: 0.4;
 }
-
 .cube-face-empty-icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 100;
   color: var(--accent);
   line-height: 1;
 }
-
 .cube-face-empty-text {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
 }
 
-/* ── Ambient glow below cube ─────────────────────────────────── */
+/* ── Ambient glow ────────────────────────────────────────────── */
 .cube-glow {
   position: absolute;
-  bottom: -40px;
+  bottom: -36px;
   left: 50%;
   transform: translateX(-50%);
-  width: 70%;
-  height: 60px;
-  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.22) 0%, transparent 70%);
+  width: 65%;
+  height: 55px;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.2) 0%, transparent 70%);
   pointer-events: none;
   filter: blur(12px);
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .cube-outer { height: auto; min-height: 100vh; }
+  .cube-container { padding-top: 2rem !important; padding-bottom: 2rem !important; }
   .cube-layout {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    min-height: auto;
+    gap: 1.5rem;
+    overflow: visible;
   }
-  .cube-scene-panel {
-    order: -1; /* cube on top on mobile */
-  }
-  .cube-3d {
-    --cube-size: 240px !important;
-  }
-  .cube-desc-card {
-    padding: 1.4rem 1.2rem;
-    min-height: 220px;
-  }
-  .cube-desc-title {
-    font-size: 1.3rem;
-  }
+  .cube-scene-panel { order: -1; height: auto; }
+  .cube-3d { --cube-size: 240px !important; }
+  .cube-topbar { flex-wrap: wrap; }
 }
 
 @media (max-width: 480px) {
-  .cube-3d {
-    --cube-size: 180px !important;
-  }
-  .cube-toggle-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  .cube-3d { --cube-size: 190px !important; }
+  .cube-topbar { flex-direction: column; align-items: flex-start; }
+  .cube-toggle-switch__label { text-align: left; }
 }
