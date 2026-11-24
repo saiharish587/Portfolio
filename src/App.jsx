@@ -3,7 +3,7 @@ import Lenis from 'lenis'
 import './styles.css'
 import { Navigation } from './components/Navigation'
 import { Hero } from './components/Hero'
-import { Projects } from './components/Projects'
+import { ProjectsCube } from './components/ProjectsCube'
 import { Skills, Experience, Education } from './components/SkillsExperienceEducation'
 import { Achievements, About, Contact, Footer } from './components/AchievementsAboutContactFooter'
 
@@ -78,7 +78,7 @@ function App() {
         <Hero />
         <About />
         <Skills />
-        <Projects />
+        <ProjectsCube />
         <Experience />
         <Education />
         <Achievements />

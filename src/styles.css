@@ -1256,3 +1256,363 @@ footer {
     padding: 3rem 0;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECTS CUBE — 3D Cube Section
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Toggle Row ───────────────────────────────────────────────── */
+.cube-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.cube-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cube-toggle-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+}
+.cube-toggle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cube-skip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cube-skip-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ── Main two-column layout ───────────────────────────────────── */
+.cube-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 520px;
+}
+
+/* ── Left: Description panel ─────────────────────────────────── */
+.cube-desc-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.cube-desc-card {
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 340px;
+}
+
+.cube-empty-slot {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0.6;
+}
+.cube-empty-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* Face dot indicators */
+.cube-face-indicator {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+.cube-face-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.cube-face-dot.active {
+  background: var(--accent);
+  transform: scale(1.35);
+  box-shadow: 0 0 8px rgba(212,175,55,0.5);
+}
+.cube-face-dot.empty {
+  border: 1px dashed rgba(255,255,255,0.2);
+  background: transparent;
+}
+
+.cube-desc-category {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cube-desc-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.cube-desc-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.cube-desc-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.cube-desc-cta {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.55rem 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cube-scroll-hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0.3rem 0;
+}
+
+/* ── Right: Cube scene ────────────────────────────────────────── */
+.cube-scene-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cube-perspective-wrapper {
+  perspective: 900px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── The 3D cube ─────────────────────────────────────────────── */
+.cube-3d {
+  width: var(--cube-size, 340px);
+  height: var(--cube-size, 340px);
+  position: relative;
+  transform-style: preserve-3d;
+  /* Initial orientation: slight aesthetic tilt */
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* ── Individual face ─────────────────────────────────────────── */
+.cube-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 8px 32px rgba(0,0,0,0.5);
+  background: #0d0d0d;
+  transition: border-color 0.4s;
+}
+
+.cube-face--active {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.1),
+    0 0 30px rgba(212, 175, 55, 0.2),
+    0 8px 32px rgba(0,0,0,0.5);
+}
+
+.cube-face-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.cube-face-img[data-loaded="true"],
+.cube-face-img.loaded {
+  opacity: 1;
+}
+
+/* Force images to show on load */
+.cube-face img {
+  opacity: 1;
+}
+
+.cube-face-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.25) 50%,
+    transparent 100%
+  );
+}
+
+.cube-face-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 2;
+}
+
+.cube-face-label-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  line-height: 1.2;
+}
+
+.cube-face-label-cat {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ── Empty face ──────────────────────────────────────────────── */
+.cube-face--empty {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.02) 0px,
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube-face-empty-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0.4;
+}
+
+.cube-face-empty-icon {
+  font-size: 3rem;
+  font-weight: 100;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.cube-face-empty-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Ambient glow below cube ─────────────────────────────────── */
+.cube-glow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 60px;
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(12px);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cube-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: auto;
+  }
+  .cube-scene-panel {
+    order: -1; /* cube on top on mobile */
+  }
+  .cube-3d {
+    --cube-size: 240px !important;
+  }
+  .cube-desc-card {
+    padding: 1.4rem 1.2rem;
+    min-height: 220px;
+  }
+  .cube-desc-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cube-3d {
+    --cube-size: 180px !important;
+  }
+  .cube-toggle-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
