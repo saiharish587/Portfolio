@@ -135,12 +135,13 @@ export const About = () => {
 
 export const Contact = () => {
   const { contact } = portfolioData;
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(contact.email)}`;
 
-  // SECURITY: Handle mailto links securely
+  // SECURITY: Handle Gmail compose link securely
   const handleEmailClick = (e) => {
-    if (!isValidUrl(`mailto:${contact.email}`)) {
+    if (!isValidUrl(gmailComposeUrl)) {
       e.preventDefault();
-      console.warn('Invalid email address');
+      console.warn('Invalid email URL');
     }
   };
 
@@ -173,8 +174,10 @@ export const Contact = () => {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
             <a 
-              href={`mailto:${contact.email}`} 
+              href={gmailComposeUrl}
               className="btn-primary" 
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={handleEmailClick}
               style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}
             >

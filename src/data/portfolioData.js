@@ -147,7 +147,7 @@ export const portfolioData = {
     socials: [
       { name: 'GitHub', url: 'https://github.com/saiharish587' },
       { name: 'LinkedIn', url: 'https://www.linkedin.com/in/saiharishpuchala/' },
-      { name: 'Email', url: 'mailto:saiharish0088@gmail.com' }
+      { name: 'Email', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=saiharish0088%40gmail.com' }
     ]
   }
   ,
